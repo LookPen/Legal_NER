@@ -1,0 +1,46 @@
+{'eval_f1': 0.48744512730448203, 'eval_precision': 0.8286567164174158, 'eval_recall': 0.34527363184071014, 'eval_loss': 0.2493257075548172, 'epoch': 1.0}
+{'loss': 0.8121, 'learning_rate': 4.557624113475177e-05, 'epoch': 1.77}
+{'eval_f1': 0.8322381654818741, 'eval_precision': 0.9028222286875465, 'eval_recall': 0.7718905472634896, 'eval_loss': 0.09917061030864716, 'epoch': 2.0}
+{'eval_f1': 0.8872524123918519, 'eval_precision': 0.9061203319499724, 'eval_recall': 0.8691542288555052, 'eval_loss': 0.07316673547029495, 'epoch': 3.0}
+{'loss': 0.0725, 'learning_rate': 4.11436170212766e-05, 'epoch': 3.55}
+{'eval_f1': 0.895006882742862, 'eval_precision': 0.9005288340466128, 'eval_recall': 0.8895522388057489, 'eval_loss': 0.06778912991285324, 'epoch': 4.0}
+{'eval_f1': 0.8911487758943148, 'eval_precision': 0.8996197718628899, 'eval_recall': 0.8828358208953028, 'eval_loss': 0.06791694462299347, 'epoch': 5.0}
+{'loss': 0.0381, 'learning_rate': 3.671099290780142e-05, 'epoch': 5.32}
+{'eval_f1': 0.9009481037921904, 'eval_precision': 0.9036536536534275, 'eval_recall': 0.8982587064674382, 'eval_loss': 0.06822583824396133, 'epoch': 6.0}
+{'eval_f1': 0.9007614530018972, 'eval_precision': 0.9040340766722866, 'eval_recall': 0.897512437810722, 'eval_loss': 0.07594416290521622, 'epoch': 7.0}
+{'loss': 0.0236, 'learning_rate': 3.227836879432624e-05, 'epoch': 7.09}
+{'eval_f1': 0.9015151515149239, 'eval_precision': 0.9153846153843807, 'eval_recall': 0.8880597014923164, 'eval_loss': 0.07713593542575836, 'epoch': 8.0}
+{'loss': 0.0155, 'learning_rate': 2.7845744680851067e-05, 'epoch': 8.87}
+{'eval_f1': 0.898351648351424, 'eval_precision': 0.9019558676025823, 'eval_recall': 0.8947761194027625, 'eval_loss': 0.07977165281772614, 'epoch': 9.0}
+{'eval_f1': 0.89900139046874, 'eval_precision': 0.9139038807502149, 'eval_recall': 0.8845771144276406, 'eval_loss': 0.08099681884050369, 'epoch': 10.0}
+{'loss': 0.0111, 'learning_rate': 2.3413120567375888e-05, 'epoch': 10.64}
+{'eval_f1': 0.9056888107494899, 'eval_precision': 0.9145320821707039, 'eval_recall': 0.8970149253729112, 'eval_loss': 0.08545110374689102, 'epoch': 11.0}
+{'eval_f1': 0.9031934877893792, 'eval_precision': 0.9094577553591653, 'eval_recall': 0.8970149253729112, 'eval_loss': 0.08946985006332397, 'epoch': 12.0}
+{'loss': 0.0081, 'learning_rate': 1.898049645390071e-05, 'epoch': 12.41}
+{'eval_f1': 0.901813633520725, 'eval_precision': 0.9069182389934826, 'eval_recall': 0.8967661691540058, 'eval_loss': 0.09563866257667542, 'epoch': 13.0}
+{'eval_f1': 0.9029271953963215, 'eval_precision': 0.9081529944637876, 'eval_recall': 0.8977611940296274, 'eval_loss': 0.0964968353509903, 'epoch': 14.0}
+{'loss': 0.0065, 'learning_rate': 1.4547872340425533e-05, 'epoch': 14.18}
+{'eval_f1': 0.9001878522226925, 'eval_precision': 0.9064312736441598, 'eval_recall': 0.8940298507460462, 'eval_loss': 0.09831832349300385, 'epoch': 15.0}
+{'loss': 0.0048, 'learning_rate': 1.0115248226950354e-05, 'epoch': 15.96}
+{'eval_f1': 0.9027481490774494, 'eval_precision': 0.9108635097490729, 'eval_recall': 0.8947761194027625, 'eval_loss': 0.099840447306633, 'epoch': 16.0}
+{'eval_f1': 0.9071106659987714, 'eval_precision': 0.9130544354836408, 'eval_recall': 0.9012437810943031, 'eval_loss': 0.10078750550746918, 'epoch': 17.0}
+{'loss': 0.0033, 'learning_rate': 5.682624113475177e-06, 'epoch': 17.73}
+{'eval_f1': 0.905138836537026, 'eval_precision': 0.9144452906826823, 'eval_recall': 0.8960199004972895, 'eval_loss': 0.10292016714811325, 'epoch': 18.0}
+{'eval_f1': 0.9043434597035138, 'eval_precision': 0.9128231120119329, 'eval_recall': 0.8960199004972895, 'eval_loss': 0.1026814728975296, 'epoch': 19.0}
+{'loss': 0.0028, 'learning_rate': 1.2588652482269505e-06, 'epoch': 19.5}
+{'eval_f1': 0.9044394281412329, 'eval_precision': 0.9119878603943066, 'eval_recall': 0.8970149253729112, 'eval_loss': 0.10347195714712143, 'epoch': 20.0}
+{'train_runtime': 1274.5617, 'train_samples_per_second': 70.613, 'train_steps_per_second': 4.425, 'train_loss': 0.0885676162357026, 'epoch': 20.0}
+Deleted old checkpoint dir [/nas/macheng.ma/output/report_analysis_pointer_roberta-wwm-ext_42/checkpoint-4794]
+***** train metrics *****
+  epoch                    =       20.0
+  train_loss               =     0.0886
+  train_runtime            = 0:21:14.56
+  train_samples_per_second =     70.613
+  train_steps_per_second   =      4.425
+*** Evaluate on Validation dataset ***
+***** eval metrics *****
+  epoch          =   20.0
+  eval_f1        = 0.9071
+  eval_loss      = 0.1008
+  eval_precision = 0.9131
+  eval_recall    = 0.9012
