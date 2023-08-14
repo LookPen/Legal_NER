@@ -36,7 +36,7 @@ class PromptNER(PreTrainedModel):
             nn.Dropout(0.1),
             nn.Linear(crf_hidden_size, num_ner_labels)
         )
-        self.crf_module = CRF(num_tags=num_ner_labels)
+        self.crf_module = CRF(num_tags=num_ner_labels, batch_first=True)
 
         self.post_init()
 
@@ -66,7 +66,9 @@ class PromptNER(PreTrainedModel):
             input_ids=input_ids,
             attention_mask=attention_mask
         )
+        # seq_output: [batch_size, seq_len, bert_dim]
         seq_output, _ = ptm_output[0], ptm_output[1]
+        # [batch_size, seq_len, num_ner_labels]
         emissions = self.crf_fc(seq_output)
         total_loss = None
         crf_decode_seqs = None

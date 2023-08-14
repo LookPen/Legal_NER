@@ -119,10 +119,11 @@ def load_ner_metric(metric_path_or_name=None, cache_dir=None):
         return results
 
 
-    current_path = os.path.abspath(__file__)
-    current_file_name = current_path.split("/")[-1]
-    ner_f1_file_name = "ner_f1.py"
-    ner_f1_path = current_path.replace(current_file_name, ner_f1_file_name)
+    # current_path = os.path.abspath(__file__)
+    # current_file_name = current_path.split("/")[-1]
+    # ner_f1_file_name = "ner_f1.py"
+    # ner_f1_path = current_path.replace(current_file_name, ner_f1_file_name)
+    ner_f1_path = r"D:\Source\promptNER\src\ner_f1.py"
     metric = load_hf_metric(ner_f1_path, cache_dir=cache_dir)
 
     return compute_metrics

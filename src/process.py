@@ -52,7 +52,7 @@ class Processor:
 
     @classmethod
     def save_jsonl(cls, file_path, file, mode="w"):
-        with open(file_path, mode) as writer:
+        with open(file_path, mode, encoding='utf-8') as writer:
             writer.write(
                 json.dumps(file, indent=4, ensure_ascii=False) + "\n"
             )
