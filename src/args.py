@@ -15,6 +15,7 @@ def initialize_traing_args(
         do_adv: Optional[bool] = False,
         seed: Optional[int] = 42,
         num_train_epochs: Optional[int] = 7,
+        # 0817 同时跑的话，因为两个bert，把batch_size设置成4或6，不然显存可能不够
         per_device_train_batch_size: Optional[int] = 16,
         per_device_eval_batch_size: Optional[int] = 8,
         learning_rate: Optional[float] = 5e-5,

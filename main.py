@@ -16,6 +16,9 @@ if __name__ == "__main__":
     output_dir = "./output"
     max_seq_length = 512
     num_train_epochs = 10
+    # 0817 evaluation_strategy和save_strategy、eval_steps和save_strategy 设置成一样，调试的时候可以设小点，观察F1是否有值且递增
+    # 0817 这里的1个step 即执行完一个batch_size
+    # 0817 日志显示一共跑28130步，10 个epoch，相当于1个epoch 要跑2800步，我们把步数设置成5即每个epoch评价5次多
     evaluation_strategy = "epoch"
     eval_steps = 50
     save_strategy = "epoch"
