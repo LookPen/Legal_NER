@@ -66,6 +66,7 @@ class PromptNER(PreTrainedModel):
             input_ids=input_ids,
             attention_mask=attention_mask
         )
+        # 0816 batch_size：per_device_train_batch_size设置
         # seq_output: [batch_size, seq_len, bert_dim]
         seq_output, _ = ptm_output[0], ptm_output[1]
         # [batch_size, seq_len, num_ner_labels]
@@ -73,6 +74,7 @@ class PromptNER(PreTrainedModel):
         total_loss = None
         crf_decode_seqs = None
         if labels is not None:
+            # TODO 0816 这个损失函数表示的是啥，损失函数为啥取反，crf.crf_module.forward
             total_loss = -1 * self.crf_module(
                 emissions=emissions,
                 tags=labels.long(),
@@ -91,6 +93,7 @@ class PromptNER(PreTrainedModel):
 
             crf_decode_seqs = torch.tensor(crf_decode_seqs).to(input_ids.device)
 
+        # TODO 0816 optimizer、反向传播 等操作在哪
         return NERModelOutput(
             loss=total_loss,
             seq_logtis=crf_decode_seqs
