@@ -35,7 +35,9 @@ class Processor:
         self.ent_types = ent_types
         self.querys = querys
         if querys is None:
-            self.querys = ent_types
+            self.ent2query = {ent:ent for ent in ent_types}
+        else:
+            self.ent2query = querys
 
         self.max_seq_length = max_seq_length
         self.over_stride = 30
@@ -57,11 +59,11 @@ class Processor:
                 json.dumps(file, indent=4, ensure_ascii=False) + "\n"
             )
 
-    @property
-    def ent2query(self):
-        if not hasattr(self, "_ent2query"):
-            self._ent2query = {ent_type: query for ent_type, query in zip(self.ent_types, self.querys)}
-        return self._ent2query
+    # @property
+    # def ent2query(self):
+    #     if not hasattr(self, "_ent2query"):
+    #         self._ent2query = {ent_type: query for ent_type, query in zip(self.ent_types, self.querys)}
+    #     return self._ent2query
 
     @property
     def ent2id(self):
