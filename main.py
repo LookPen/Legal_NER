@@ -25,21 +25,21 @@ if __name__ == "__main__":
     save_steps = 50
 
     ent_types = [
-        "NATS",
-        "NO",
-        "NHVI",
-        "NHCS",
-        "NASI",
-        "NCGV",
-        "NT",
-        "NS",
-        "NCSP",
-        "NCSM"
+        "被盗物品",
+        "地点",
+        "作案工具",
+        "时间",
+        "盗窃获利",
+        "犯罪嫌疑人",
+        "被盗货币",
+        "物品价值",
+        "受害人",
+        "组织机构"
     ]
 
     data_files = {
-        "train": "./data/ner/train.json",
-        "test": "./data/ner/test.json"
+        "train": "./data/ner2/train.json",
+        "test": "./data/ner2/test.json"
     }
 
     tokenizer = AutoTokenizer.from_pretrained(model_path_or_name)
