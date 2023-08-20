@@ -43,12 +43,13 @@ if __name__ == "__main__":
     }
 
     tokenizer = AutoTokenizer.from_pretrained(model_path_or_name)
-    # querys = json.load(open(r"D:\Source\promptNER\data\ner2\ent_types.json"))
+    # 0820 prompt 提示
+    querys = json.load(open(r"D:\Source\promptNER\data\ner2\ent2query.json", encoding='utf-8'))
 
     processor = Processor(
         tokenizer,
         ent_types=ent_types,
-        querys=None,
+        querys=querys,
         max_seq_length=max_seq_length
     )
 
