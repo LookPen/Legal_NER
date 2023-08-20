@@ -93,7 +93,7 @@ class PromptNER(PreTrainedModel):
 
             crf_decode_seqs = torch.tensor(crf_decode_seqs).to(input_ids.device)
 
-        # TODO 0816 optimizer、反向传播 等操作在哪
+        # 0820 optimizer、反向传播 等再Trainer中封装好了，这里必须返回ModelOutput类型
         return NERModelOutput(
             loss=total_loss,
             seq_logtis=crf_decode_seqs

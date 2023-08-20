@@ -85,6 +85,7 @@ class NERF1(datasets.Metric):
             pred = set(pred)
             gold = set(gold)
 
+            # 0820 取预测和实际的交集 (start,end,type,entity) 即开始位置、结束位置、类型、实体内容都预测对了的话num_common就加4
             num_common += len(pred & gold)
             num_pred += len(pred)
             num_gold += len(gold)
