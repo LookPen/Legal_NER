@@ -58,7 +58,7 @@ def initialize_traing_args(
         save_steps=eval_steps if save_strategy == "steps" else None,
         save_total_limit=save_total_limit,
         load_best_model_at_end=True,
-        logging_steps=10,
+        # logging_steps=10,
         metric_for_best_model=metric_for_best_model,
         remove_unused_columns=remove_unused_columns,
         overwrite_output_dir=overwrite_output_dir,
