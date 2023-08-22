@@ -35,7 +35,7 @@ class Processor:
         self.ent_types = ent_types
         self.querys = querys
         if querys is None:
-            self.ent2query = {ent:ent for ent in ent_types}
+            self.ent2query = {ent: ent for ent in ent_types}
         else:
             self.ent2query = querys
 
@@ -129,6 +129,8 @@ class Processor:
                 entities = [{"start_idx": s, "end_idx": e, "type": t, "entity": ent} for s, e, t, ent in
                             zip(entities["start_idx"], entities["end_idx"], entities["type"], entities["entity"])]
 
+            exp_ent_types = [ent['type'] for ent in entities]
+
             text = text.replace(" ", ",")
             # sub_sents = get_sub_seq_from_sentence(text, max_seq_length, over_stride=over_stride)
             sub_sents = [text]
@@ -140,11 +142,12 @@ class Processor:
                 start_index += len(sent) - over_stride
 
                 for ent_type, query in self.ent2query.items():
-                    batch_querys.append(query)
-                    batch_ent_types.append(ent_type)
-                    batch_texts.append(sent)
-                    batch_labels.append([ent for ent in entities if ent["type"] == ent_type])
-                    batch_exp_ids.append("{}_{}".format(text_id, sent_id))
+                    if ent_type in exp_ent_types:
+                        batch_querys.append(query)
+                        batch_ent_types.append(ent_type)
+                        batch_texts.append(sent)
+                        batch_labels.append([ent for ent in entities if ent["type"] == ent_type])
+                        batch_exp_ids.append("{}_{}".format(text_id, sent_id))
 
         examples = {
             "text": batch_texts,
