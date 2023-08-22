@@ -1,4 +1,5 @@
 import collections
+import random
 from typing import Optional, Tuple
 import numpy as np
 import os
@@ -92,7 +93,7 @@ class Processor:
         examples = dataset.map(
             self.get_examples,
             batched=True,
-            batch_size=10,
+            batch_size=16,
             remove_columns=remove_columns,
             load_from_cache_file=not overwrite_cache,
             num_proc=1,
@@ -102,7 +103,7 @@ class Processor:
         encoded_features = examples.map(
             self.convert_examples_to_features,
             batched=True,
-            batch_size=10,
+            batch_size=16,
             load_from_cache_file=not overwrite_cache,
             remove_columns=examples.column_names,
             num_proc=1,
@@ -114,6 +115,11 @@ class Processor:
         return encoded_features, examples
 
     def get_examples(self, dataset):
+        """
+
+        :param dataset: 0822 dataset.map 中，batch_size 个样本
+        :return:
+        """
         # 50相当于query length
         max_seq_length = self.max_seq_length - 50
 
@@ -129,7 +135,7 @@ class Processor:
                 entities = [{"start_idx": s, "end_idx": e, "type": t, "entity": ent} for s, e, t, ent in
                             zip(entities["start_idx"], entities["end_idx"], entities["type"], entities["entity"])]
 
-            exp_ent_types = [ent['type'] for ent in entities]
+            exp_ent_types = [ent['type'] for ent in entities]  # 0822把这句话的所有存在实体拿出来
 
             text = text.replace(" ", ",")
             # sub_sents = get_sub_seq_from_sentence(text, max_seq_length, over_stride=over_stride)
@@ -141,8 +147,12 @@ class Processor:
                 # new_labels = refactor_labels(sent, entities, start_index)
                 start_index += len(sent) - over_stride
 
-                for ent_type, query in self.ent2query.items():
+                for ent_type, querys in self.ent2query.items():
+                    # 0822 recall 高（识别得越多，和实际的交集就越大，分子就越大，分母都是真实实体个数） precision低（分子与recall 一样，但是分母是预测的个数），所以当预测的个数更高的话，recall就会高一点，precision就会低点
+                    # 0822 实际上是多预测了实体，所以在预测前过滤下，理论上就可以提高precision ！！！！
+                    # 0822 只拼接存在的实体类型 （之前是无论有没有都拼接在前面），这样防止误识别
                     if ent_type in exp_ent_types:
+                        query = random.choice(querys)  # 0822 更随机了，动态随机prompt!!! （扩充下prompt的list，每个元素不要太长）
                         batch_querys.append(query)
                         batch_ent_types.append(ent_type)
                         batch_texts.append(sent)
