@@ -129,13 +129,13 @@ class Processor:
         batch_ent_types = []
         batch_querys = []
         over_stride = self.over_stride
-        for text_id, text, entities in zip(dataset["id"], dataset["text"], dataset["entities"]):
+        for text_id, text, entities, exp_ent_types in zip(dataset["id"], dataset["text"], dataset["entities"], dataset["ent_types"]):
 
             if isinstance(entities, dict):
                 entities = [{"start_idx": s, "end_idx": e, "type": t, "entity": ent} for s, e, t, ent in
                             zip(entities["start_idx"], entities["end_idx"], entities["type"], entities["entity"])]
 
-            exp_ent_types = [ent['type'] for ent in entities]  # 0822把这句话的所有存在实体拿出来
+            # exp_ent_types = [ent['type'] for ent in entities]  # 0822把这句话的所有存在实体拿出来
 
             text = text.replace(" ", ",")
             # sub_sents = get_sub_seq_from_sentence(text, max_seq_length, over_stride=over_stride)

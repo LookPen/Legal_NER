@@ -73,7 +73,7 @@ class PromptNER(PreTrainedModel):
         emissions = self.crf_fc(seq_output)
         total_loss = None
         crf_decode_seqs = None
-        if labels is not None:
+        if labels is not None:  # 0917 训练阶段
             # TODO 0816 这个损失函数表示的是啥，损失函数为啥取反，crf.crf_module.forward
             total_loss = -1 * self.crf_module(
                 emissions=emissions,
@@ -82,7 +82,7 @@ class PromptNER(PreTrainedModel):
                 reduction="mean"
             )
 
-        if not self.training:
+        if not self.training:  # 0917 评估阶段 不会使用labels
             seq_length = input_ids.size(1)
             crf_decode_seqs = self.crf_module.decode(emissions=emissions,
                                                      mask=attention_mask.byte()

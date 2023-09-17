@@ -38,8 +38,8 @@ if __name__ == "__main__":
     ]
 
     data_files = {
-        "train": "./data/ner2/train.json",
-        "test": "./data/ner2/test.json"
+        "train": "./data/ner2/train2.json",
+        "test": "./data/ner2/test2.json"
     }
 
     tokenizer = AutoTokenizer.from_pretrained(model_path_or_name)
