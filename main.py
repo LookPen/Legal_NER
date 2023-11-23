@@ -11,11 +11,11 @@ from src.ner_f1 import load_ner_metric
 from datasets import load_dataset
 
 if __name__ == "__main__":
-    model_path_or_name = r"D:\Code\huggingface\roberta-wwm-ext"
+    model_path_or_name = r"D:\OneDrive\毕业论文\实验\huggingface\roberta-wwm-ext"
     cache_dir = "./cache_dir"
     output_dir = "./output"
     max_seq_length = 512
-    num_train_epochs = 15
+    num_train_epochs = 40
     # 0817 evaluation_strategy和save_strategy、eval_steps和save_strategy 设置成一样，调试的时候可以设小点，观察F1是否有值且递增
     # 0817 这里的1个step 即执行完一个batch_size
     # 0817 日志显示一共跑28130步，10 个epoch，相当于1个epoch 要跑2800步，我们把步数设置成5即每个epoch评价5次多
@@ -38,13 +38,13 @@ if __name__ == "__main__":
     ]
 
     data_files = {
-        "train": "./data/ner2/train2.json",
-        "test": "./data/ner2/test2.json"
+        "train": "./data/ner2/train_re.json",
+        "test": "./data/ner2/test_re.json"
     }
 
     tokenizer = AutoTokenizer.from_pretrained(model_path_or_name)
     # 0820 prompt 提示
-    querys = json.load(open(r"D:\Source\promptNER\data\ner2\ent2query.json", encoding='utf-8'))
+    querys = json.load(open(r"D:\OneDrive\毕业论文\实验\promptNER\data\ner2\ent2query.json", encoding='utf-8'))
 
     processor = Processor(
         tokenizer,
