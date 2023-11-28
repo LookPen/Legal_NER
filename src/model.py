@@ -30,13 +30,23 @@ class PromptNER(PreTrainedModel):
         else:
             raise ValueError("需要提供ner labels")
 
-        self.crf_fc = nn.Sequential(
-            nn.Linear(hidden_dim, crf_hidden_size),
-            nn.ReLU(),
-            nn.Dropout(0.1),
-            nn.Linear(crf_hidden_size, num_ner_labels)
-        )
-        self.crf_module = CRF(num_tags=num_ner_labels, batch_first=True)
+        HIDDEN_SIZE = 256
+        self.lstm = nn.LSTM(hidden_dim, HIDDEN_SIZE,
+                            batch_first=True,  # 第一维是batch_size
+                            bidirectional=True)  # BiLSTM
+        # 因为BiLSTM的hidden是拼接的，所以输出的大小为2 * HIDDEN_SIZE
+        # 映射到TARGET_SIZE，即序列中每个字的标注信息——每个标注的概率大小（非归一化），并不是直接通过softmax转成概率，
+        # 而是通过CRF学习每个字的标注之间的约束
+        self.crf_fc = nn.Linear(2 * HIDDEN_SIZE, num_ner_labels)
+        self.crf_module = CRF(num_ner_labels, batch_first=True)  # 第一维是batch_size
+
+        # self.crf_fc = nn.Sequential(
+        #     nn.Linear(hidden_dim, crf_hidden_size),
+        #     nn.ReLU(),
+        #     nn.Dropout(0.1),
+        #     nn.Linear(crf_hidden_size, num_ner_labels)
+        # )
+        # self.crf_module = CRF(num_tags=num_ner_labels, batch_first=True)
 
         self.post_init()
 
@@ -69,8 +79,12 @@ class PromptNER(PreTrainedModel):
         # 0816 batch_size：per_device_train_batch_size设置
         # seq_output: [batch_size, seq_len, bert_dim]
         seq_output, _ = ptm_output[0], ptm_output[1]
-        # [batch_size, seq_len, num_ner_labels]
-        emissions = self.crf_fc(seq_output)
+
+        # out [batch_size, seq_len, 2 * HIDDEN_SIZE]
+        out, _ = self.lstm(seq_output)
+
+        # emissions [batch_size,num_ner_labels]
+        emissions = self.crf_fc(out)
         total_loss = None
         crf_decode_seqs = None
         if labels is not None:  # 0917 训练阶段

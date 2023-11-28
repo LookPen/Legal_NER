@@ -153,7 +153,7 @@ class Processor:
                     # 0822 只拼接存在的实体类型 （之前是无论有没有都拼接在前面），这样防止误识别
                     if ent_type in exp_ent_types:
                         query = random.choice(querys)  # 0822 更随机了，动态随机prompt!!! （扩充下prompt的list，每个元素不要太长）
-                        batch_querys.append(query)
+                        batch_querys.append('')
                         batch_ent_types.append(ent_type)
                         batch_texts.append(sent)
                         batch_labels.append([ent for ent in entities if ent["type"] == ent_type])
