@@ -11,7 +11,8 @@ from src.ner_f1 import load_ner_metric
 from datasets import load_dataset
 
 if __name__ == "__main__":
-    model_path_or_name = r"D:\OneDrive\毕业论文\实验\huggingface\roberta-wwm-ext"
+    # model_path_or_name = r"D:\OneDrive\毕业论文\实验\huggingface\roberta-wwm-ext"
+    model_path_or_name = r"D:\OneDrive\毕业论文\03实验\huggingface\hfl\chinese-roberta-wwm-ext"
     cache_dir = "./cache_dir"
     output_dir = "./output"
     max_seq_length = 512
@@ -44,7 +45,7 @@ if __name__ == "__main__":
 
     tokenizer = AutoTokenizer.from_pretrained(model_path_or_name)
     # 0820 prompt 提示
-    querys = json.load(open(r"D:\OneDrive\毕业论文\实验\promptNER\data\ner2\ent2query.json", encoding='utf-8'))
+    querys = json.load(open(r"D:\OneDrive\毕业论文\03实验\promptNER\data\ner2\ent2query.json", encoding='utf-8'))
 
     processor = Processor(
         tokenizer,
