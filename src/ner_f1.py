@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ NER F1 metric. """
+import collections
 import os
 import datasets
 from datasets import load_metric as load_hf_metric
@@ -80,8 +81,10 @@ class NERF1(datasets.Metric):
         num_common = 0
         num_pred = 1e-9
         num_gold = 1e-9
+        types_common = collections.defaultdict(lambda: 0)
+        types_pred = collections.defaultdict(lambda: 1e-9)
+        types_gold = collections.defaultdict(lambda: 1e-9)
         for pred, gold in zip(predictions, references):
-
             pred = set(pred)
             gold = set(gold)
 
@@ -90,7 +93,16 @@ class NERF1(datasets.Metric):
             num_pred += len(pred)
             num_gold += len(gold)
 
+            types_common[list(gold)[0][2]] += len(pred & gold)
+            types_pred[list(gold)[0][2]] += len(pred)
+            types_gold[list(gold)[0][2]] += len(gold)
+
         f1, precision, recall = 2 * num_common / (num_pred + num_gold), num_common / num_pred, num_common / num_gold
+
+        for key in types_gold.keys():
+            key_f1, key_precision, key_recall = 2 * types_common[key] / (types_pred[key] + types_gold[key]), \
+                                                types_common[key] / types_pred[key], types_common[key] / types_gold[key]
+            print(f"################## {key} f1:{key_f1}  precision:{key_precision} recall:{key_recall}")
 
         return {"f1": f1,
                 "precision": precision,
@@ -118,7 +130,6 @@ def load_ner_metric(metric_path_or_name=None, cache_dir=None):
 
         results = metric.compute(predictions=predictions, references=references)
         return results
-
 
     # current_path = os.path.abspath(__file__)
     # current_file_name = current_path.split("/")[-1]
