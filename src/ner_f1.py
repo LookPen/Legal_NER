@@ -93,9 +93,10 @@ class NERF1(datasets.Metric):
             num_pred += len(pred)
             num_gold += len(gold)
 
-            types_common[list(gold)[0][2]] += len(pred & gold)
-            types_pred[list(gold)[0][2]] += len(pred)
-            types_gold[list(gold)[0][2]] += len(gold)
+            if len(gold) > 0:
+                types_common[list(gold)[0][2]] += len(pred & gold)
+                types_pred[list(gold)[0][2]] += len(pred)
+                types_gold[list(gold)[0][2]] += len(gold)
 
         f1, precision, recall = 2 * num_common / (num_pred + num_gold), num_common / num_pred, num_common / num_gold
 
